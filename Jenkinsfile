@@ -1,5 +1,5 @@
 @Library('github.com/invoca/jenkins-pipeline@master')
-def docker = new io.invoca.Docker()
+def docker = new com.invoca.Docker()
 
 pipeline {
     agent { label 'docker' }
@@ -9,7 +9,7 @@ pipeline {
                 script {
                     imageArgs = [
                         dockerfile: '.',
-                        image_name: 'invocaops/base',
+                        imageName: 'invocaops/base',
                     ]
                 }
             }
@@ -31,7 +31,7 @@ pipeline {
                 DOCKERHUB_PASSWORD = credentials('dockerhub_password')
             }
             steps {
-                script { docker.imageTagPush(imageArgs.image_name) }
+                script { docker.imageTagPush(imageArgs.imageName) }
             }
         }
     }
